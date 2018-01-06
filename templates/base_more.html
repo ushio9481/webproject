@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="favicon.ico">
+		<title>New Project</title>
+		<!-- Bootstrap core CSS -->
+		<link href="{% static 'website/bootstrap-assets/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link rel="stylesheet" href="{% static 'easy_comment/css/comment.css' %}">
+		<link href="{% static 'website/css/style.css' %}" rel="stylesheet">
+
+		<style type="text/css">
+       DIV.pagination {
+        PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; MARGIN: 7px;
+         PADDING-TOP: 2px; FONT-FAMILY: "Lucida Sans Unicode",
+         "Lucida Grande", LucidaGrande, "Lucida Sans", Geneva, Verdana, sans-serif
+       }
+       DIV.pagination A {
+        PADDING-RIGHT: 0.64em; PADDING-LEFT: 0.64em; PADDING-BOTTOM: 0.43em;
+         MARGIN: 2px; COLOR: #fff; PADDING-TOP: 0.5em;
+        BACKGROUND-COLOR: #3D3D3D; TEXT-DECORATION: none
+       }
+        DIV.pagination A:hover {
+        PADDING-RIGHT: 0.64em; PADDING-LEFT: 0.64em; PADDING-BOTTOM: 0.43em;
+         MARGIN: 2px; COLOR: #fff; PADDING-TOP: 0.5em; BACKGROUND-COLOR: #CD2626
+       }
+        DIV.pagination A:active {
+        PADDING-RIGHT: 0.64em; PADDING-LEFT: 0.64em; PADDING-BOTTOM: 0.43em;
+         MARGIN: 2px; COLOR: #fff; PADDING-TOP: 0.5em; BACKGROUND-COLOR: #B2DFEE
+        }
+      </style>
+	</head>
+	<body>
+		<!-- Navigation -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="{% url 'website:index' %}">Home</a></li>
+						<li><a href="{% url 'website:blog' %}" class="page-scroll">Bolg</a></li>
+						<li><a href="http://www.aragakiyui.cn/category/1/" class="page-scroll">Gakki news</a></li>
+						<li><a href="{% url 'website:photo' %}" class="page-scroll">Photo</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{% url 'login' %}" class="page-scroll">login</a></li>
+						<li><a href="{% url 'logout' %}?next={{ request.path }}">logout</a></li>
+						<li>
+							<form role="search" method="get" id="searchform" action="{% url 'website:search' %}" style="border:none;">
+							<input type="search"  name="q" placeholder="search" required style="width:150px;height:20px;background:white;color:black;margin:14px">
+							</form>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+        {% block main %}
+        {% endblock main %}
+		<footer class="footer">
+			<div class="footer-bottom" style="margin:20px 0 0 0;" >
+				<i class="fa fa-copyright"></i> OKAZAKI USHIO の blog.&copy;2017. <br>闽ICP备17031317号
+			</div>
+		</footer>
+
+		<!-- Bootstrap core JavaScript
+			================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="{% static 'website/js/jquery.bxslider.js' %}"></script>
+		<script src="{% static 'website/js/mooz.scripts.min.js' %}"></script>
+		<script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    </body>
+</html>

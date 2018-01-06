@@ -1,0 +1,200 @@
+{% load staticfiles %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bootstrap 实例 - 模态框（Modal）插件</title>
+	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="{% static 'website/css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="{% url 'website:index' %}">Home</a></li>
+						<li><a href="{% url 'website:blog' %}" class="page-scroll">Bolg</a></li>
+						<li><a href="http://www.aragakiyui.cn/category/1/" class="page-scroll">Gakki news</a></li>
+						<li><a href="{% url 'website:photo' %}" class="page-scroll">Photo</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{% url 'login' %}" class="page-scroll">login</a></li>
+						<li><a href="{% url 'logout' %}?next={{ request.path }}">logout</a></li>
+						<li>
+							<form role="search" method="get" id="searchform" action="{% url 'website:search' %}" style="border:none;">
+							<input type="search"  name="q" placeholder="search" required style="width:150px;height:20px;background:white;color:black;margin:14px">
+							</form>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</nav>
+		<div class="container">
+		<header>
+			<a href="{% url 'website:index' %}"><img src="{% static 'images/top.jpg' %}"></a>
+		</header>
+			<h2>Some Photo</h2>
+		<!-- 按钮触发模态框 -->
+		<div style="width:750px;float:left">
+		<div style="height:270px;width:375px;float:left;">
+		<img src="{% static 'images/1.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%;">
+		<img src="{% static 'images/1.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+		<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/2.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/2.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+		<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/3.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal3" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/3.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+		<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/4.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal4" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/4.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+			<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/5.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal5" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/5.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+			<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/6.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal6" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/6.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+			<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/7.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal7" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/7.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+			<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/8.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal8" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/8.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+			<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/9.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal9" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/9.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+
+			<div style="height:270px;width:375px;float:left">
+		<img src="{% static 'images/10.jpg' %}" style="height:240px;width:380px;background-color:white;border:none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal10" />
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:auto;left:6.25%;top:6.25%">
+		<img src="{% static 'images/10.jpg' %}" style="width:1600px;height:900px"/>
+		</div>
+		</div>
+		</div>
+				<div class="col-md-4 sidebar-gutter" style="float:right;margin:0">
+					<aside>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">About Me</h3>
+						<div class="widget-container widget-about">
+							<a href="post.html"><img src="{% static 'images/author.jpg' %}" alt=""></a>
+							<h4>OKAZAKI USHIO</h4>
+							<div class="author-title">Designer</div>
+							<p style="text-align:center">一位现居Amoy的少年</p>
+							<p>嘎粉/日剧/美剧/动漫/科技/喜欢黑白蓝/python+php+web前端+日语自学中...</p>
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">Featured Posts</h3>
+						{% get_recent_posts as recent_post_list %}
+						<div class="widget-container">
+							{% for post in recent_post_list %}
+							<article class="widget-post">
+								<div class="post-image">
+									{% for photo in post.photo_set.all %}<a href="post.html"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
+								</div>
+								<div class="post-body">
+									<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i>{{ post.created_time }}</span> <span><a href="post.html"><i class="fa fa-comment-o"></i>{{ post.views }}阅读</a></span>
+									</div>
+								</div>
+							</article>
+							{% endfor %}
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">ARCHIVES</h3>
+						<div class="widget-container">
+							{% archives as date_list %}
+							<ul>
+							{% for date in date_list %}
+							<li>
+							<a href="{% url 'website:archives' date.year date.month %}">{{ date.year }} 年 {{ date.month }} 月</a>
+							</li>
+							{% empty %}
+							暂无归档！
+							{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">Categories</h3>
+						<div class="widget-container">
+						  {% get_categories as category_list %}
+						  <ul>
+							{% for category in category_list %}
+							<li>
+							  <a href="{% url 'website:category' category.pk %}">{{ category.name }} <span class="post-count">({{ category.num_posts }})</span></a>
+							</li>
+							{% empty %}
+							暂无分类！
+							{% endfor %}
+						  </ul>
+						</div>
+					</div>
+                </aside>
+                </div>
+		</div>
+
+		<footer class="footer">
+			<div class="footer-bottom" style="margin:20px 0 0 0;">
+				<i class="fa fa-copyright" ></i>OKAZAKI USHIO の blog.&copy;2017. <br>
+				闽ICP备17031317号
+			</div>
+		</footer>
+</body>
+</html>

@@ -1,0 +1,191 @@
+{% load staticfiles %}
+{% load blog_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <title>New Project</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Css -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Style -->
+    <link href="{% static 'website/plugins/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'website/plugins/owl-carousel/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% static 'website/plugins/owl-carousel/owl.transitions.css' %}" rel="stylesheet">
+    <link href="{% static 'website/plugins/Lightbox/dist/css/lightbox.css' %}" rel="stylesheet">
+    <link href="{% static 'website/plugins/Icons/et-line-font/style.css' %}" rel="stylesheet">
+    <link href="{% static 'website/plugins/animate.css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'website/css/main.css' %}" rel="stylesheet">
+	<link href="{% static 'website/css/style.css' %}" rel="stylesheet">
+    <!-- Icons Font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv.min.js@3.7.2/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.min.js@1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <!-- Preloader
+	============================================= -->
+    <div class="preloader"><i class="fa fa-circle-o-notch fa-spin fa-2x"></i></div>
+    <!-- Header
+	============================================= -->
+    <section class="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+                    <div class="col-md-8 col-xs-12 nav-wrap">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{% url 'website:index' %}" class="page-scroll">Home</a></li>
+                            <li><a href="{% url 'website:blog' %}" class="page-scroll">Bolg</a></li>
+                            <li><a href="http://www.aragakiyui.cn/category/1/" class="page-scroll">Gakki news</a></li>
+                            <li><a href="{% url 'website:photo' %}" class="page-scroll">Photo</a></li>
+                        </ul>
+                    </div>
+                    <div class="social-media hidden-sm hidden-xs">
+                        <ul class="nav navbar-nav">
+                            <li><a href="{% url 'login' %}" class="page-scroll">login</a></li>
+							<li><a href="{% url 'logout' %}?next={{ request.path }}">logout</a></li>>
+							<li>
+								<form role="search" method="get" id="searchform" action="{% url 'website:search' %}" style="border:none">
+								<input type="search"  name="q" placeholder="search" required style="width:150px;height:20px;background:white;color:black;margin:30px 0 0 15px;">
+								</form>
+							</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="owl-hero" class="owl-carousel owl-theme">
+            <div class="item" style="background-image: url({% static 'img/sliders/picture1.jpg' %})">
+            </div>
+            <div class="item" style="background-image: url({% static 'img/sliders/picture2.jpeg' %})">
+            </div>
+            <div class="item" style="background-image: url({% static 'img/sliders/picture3.jpg' %})">
+            </div>
+        </div>
+    </section>
+
+		<div class="container">
+		<section>
+			<div class="row">
+				<div class="col-md-8">
+				{% block main %}
+				{% endblock main %}
+					<!-- article -->
+				</div>
+				<div class="col-md-4 sidebar-gutter">
+					<aside>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">About Me</h3>
+						<div class="widget-container widget-about">
+							<a href="post.html"><img src="{% static 'images/author.jpg' %}" alt=""></a>
+							<h4>OKAZAKI USHIO</h4>
+							<div class="author-title">Designer</div>
+							<p style="text-align:center">一位现居Amoy的少年</p>
+							<p>嘎粉/日剧/美剧/动漫/科技/喜欢黑白蓝/python+php+web前端+日语自学中...</p>
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">Featured Posts</h3>
+						{% get_recent_posts as recent_post_list %}
+						<div class="widget-container">
+							{% for post in recent_post_list %}
+							<article class="widget-post">
+								<div class="post-image">
+									{% for photo in post.photo_set.all %}<a href="post.html"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
+								</div>
+								<div class="post-body">
+									<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i>{{ post.created_time }}</span> <span><a href="post.html"><i class="fa fa-comment-o"></i>{{ post.views }}阅读</a></span>
+									</div>
+								</div>
+							</article>
+							{% endfor %}
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">ARCHIVES</h3>
+						<div class="widget-container">
+							{% archives as date_list %}
+							<ul>
+							{% for date in date_list %}
+							<li>
+							<a href="{% url 'website:archives' date.year date.month %}">{{ date.year }} 年 {{ date.month }} 月</a>
+							</li>
+							{% empty %}
+							暂无归档！
+							{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">Categories</h3>
+						<div class="widget-container">
+						  {% get_categories as category_list %}
+						  <ul>
+							{% for category in category_list %}
+							<li>
+							  <a href="{% url 'website:category' category.pk %}">{{ category.name }} <span class="post-count">({{ category.num_posts }})</span></a>
+							</li>
+							{% empty %}
+							暂无分类！
+							{% endfor %}
+						  </ul>
+						</div>
+					</div>
+					</aside>
+				</div>
+			</div>
+		</section>
+		</div><!-- /.container -->
+
+		<footer class="footer">
+			<div class="footer-bottom" >
+				<i class="fa fa-copyright" style="margin:40px 0 5px 0"> OKAZAKI USHIO の blog.&copy;2017.</i ><br />闽ICP备17031317号
+			</div>
+		</footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'website/js/custom.js' %}"></script>
+    <!-- JS PLUGINS -->
+    <script src="{% static 'website/plugins/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'website/js/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'website/plugins/countTo/jquery.countTo.js' %}"></script>
+    <script src="{% static 'website/plugins/inview/jquery.inview.min.js' %}"></script>
+    <script src="{% static 'website/plugins/Lightbox/dist/js/lightbox.min.js' %}"></script>
+    <script src="{% static 'website/plugins/WOW/dist/wow.min.js' %}"></script>
+	<script src="{% static 'website/js/mooz.scripts.min.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+{% extends 'base_more.html' %}
+{% load staticfiles %}
+{% load blog_tags %}
+{% block main %}
+
+<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- 评论框、评论列表和通知列表的样式 -->
+<link rel="stylesheet" href="{% static 'easy_comment/css/comment.css' %}">
+
+<!-- 代码块的高亮 -->
+<link rel="stylesheet" href="{% static 'easy_comment/css/prism.css' %}">
+<script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'website/css/custom.css' %}">
+
+		<div class="container">
+		<header>
+			<a href="{% url 'website:index' %}"><img src="{% static 'images/top.jpg' %}"></a>
+		</header>
+		<section>
+			<div class="row">
+				<div class="col-md-8">
+					<article class="blog-post">
+						<div class="blog-post-body">
+							<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+							<div class="post-meta"><span>by <a href="#">{{ post.author }}</a></span>/<span><i class="fa fa-clock-o"></i>{{ post.created_time }}</span>/<span><i class="fa fa-comment-o"></i> <a href="#">{{ post.views }}阅读</a></span></div>
+							<div class="blog-post-text">
+							{{ post.body|safe }}
+							</div>
+						</div>
+					</article>
+				</div>
+				<div class="col-md-4 sidebar-gutter">
+					<aside>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">About Me</h3>
+						<div class="widget-container widget-about">
+							<a href="post.html"><img src="{% static 'images/author.jpg' %}" alt=""></a>
+							<h4>OKAZAKI USHIO</h4>
+							<div class="author-title">Designer</div>
+							<p style="text-align:center">一位现居Amoy的少年</p>
+							<p>嘎粉/日剧/美剧/动漫/科技/喜欢黑白蓝/python+php+web前端+日语自学中...</p>
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">Featured Posts</h3>
+						{% get_recent_posts as recent_post_list %}
+						<div class="widget-container">
+							{% for post in recent_post_list %}
+							<article class="widget-post">
+								<div class="post-image">
+									{% for photo in post.photo_set.all %}<a href="post.html"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
+								</div>
+								<div class="post-body">
+									<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+									<div class="post-meta">
+										<span><i class="fa fa-clock-o"></i>{{ post.created_time }}</span> <span><a href="post.html"><i class="fa fa-comment-o"></i>{{ post.views }}阅读</a></span>
+									</div>
+								</div>
+							</article>
+							{% endfor %}
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">ARCHIVES</h3>
+						<div class="widget-container">
+							{% archives as date_list %}
+							<ul>
+							{% for date in date_list %}
+							<li>
+							<a href="{% url 'website:archives' date.year date.month %}">{{ date.year }} 年 {{ date.month }} 月</a>
+							</li>
+							{% empty %}
+							暂无归档！
+							{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<!-- sidebar-widget -->
+					<div class="sidebar-widget">
+						<h3 class="sidebar-title">Categories</h3>
+						<div class="widget-container">
+						  {% get_categories as category_list %}
+						  <ul>
+							{% for category in category_list %}
+							<li>
+							  <a href="{% url 'website:category' category.pk %}">{{ category.name }} <span class="post-count">({{ category.num_posts }})</span></a>
+							</li>
+							{% empty %}
+							暂无分类！
+							{% endfor %}
+						  </ul>
+						</div>
+					</div>
+                </aside>
+                </div>
+                </div>
+            </section>
+        </div>
+		<section class="comment-area" id="comment-area" style="width:1140px;position:relative;right:-20%;"  >
+			 <hr>
+                <h3 style="margin:0 0 10px 40px">发表评论</h3>
+				<ul>{% include 'easy_comment/comment_form.html' with post=post %}
+					{% include 'easy_comment/comment_list.html' with post=post %}
+				</ul>
+		</section>
+
+		<!-- /.container -->
+{% endblock main %}
