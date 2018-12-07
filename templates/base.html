@@ -6,7 +6,7 @@
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <title>New Project</title>
+    <title>Hey,I'm Here</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -116,7 +116,7 @@
 							{% for post in recent_post_list %}
 							<article class="widget-post">
 								<div class="post-image">
-									{% for photo in post.photo_set.all %}<a href="post.html"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
+									{% for photo in post.photo_set.all %}<a href="{{ post.get_absolute_url }}"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
 								</div>
 								<div class="post-body">
 									<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
