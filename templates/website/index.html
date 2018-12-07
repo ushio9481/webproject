@@ -9,7 +9,7 @@
 					{% for post in recent_post_list %}
 					<article class="blog-post">
 						<div class="blog-post-image" align="center">
-							{% for photo in post.photo_set.all %}<a href="post.html"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
+							{% for photo in post.photo_set.all %}<a href="{{ post.get_absolute_url }}"><img src="{{ photo.image.thumb_url }}" alt=""></a>{% endfor %}
 						</div>
 						<div class="blog-post-body">
 							<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
